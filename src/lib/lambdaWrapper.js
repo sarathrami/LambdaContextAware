@@ -9,7 +9,9 @@ exports.handler = function(event, context) {
         var body = (data && !event.restart) ? data.Body : '{}';
         var bodyString = body ? body.toString() : '{}';
         var bodyJSON = JSON.parse(bodyString);
-        // Call the actal flow
+		if(__codeHash != bodyJSON.code_hash) // The code hash has changed, discard context
+			bodyJSON = {code_hash: __codeHash};
+        // Call the actual flow
 		var generator = new __transCompiledCode(event, bodyJSON);
         var ret = generator.next();
         console.log('CONTEXT:' + JSON.stringify(bodyJSON));
