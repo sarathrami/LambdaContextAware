@@ -12,7 +12,8 @@ regexp = r'function\s+([^(]*)\(([^,]+),\s+([^)]+)\)\s*{(\s*var\s+([^;]*);)*\n*\s
 # Use the regenerator to expose the local vars using closure
 proc = subprocess.Popen(['regenerator', srcFilePath], stdout=subprocess.PIPE, stderr=subprocess.PIPE);
 code, err = proc.communicate();
-
+if not code:
+  raise Exception('Please check your code for compilation errors.' + err);
 # Calculate the code has from pre-trans-compile
 code_hash = hashlib.sha224(code).hexdigest();
 
