@@ -39,12 +39,10 @@ except:
   pass
 
 # Fetch the runtime code
-proc = subprocess.Popen(['cat', 'src/lib/runtime.js'], stdout=subprocess.PIPE, stderr=subprocess.PIPE);
-runtime_code, err = proc.communicate();
+runtime_code = open('src/lib/runtime.js', 'r').read();
 
 # Fetch the lambda wrapper code
-proc = subprocess.Popen(['cat', 'src/lib/lambdaWrapper.js'], stdout=subprocess.PIPE, stderr=subprocess.PIPE);
-lambda_wrapper_code, err = proc.communicate();
+lambda_wrapper_code = open('src/lib/lambdaWrapper.js', 'r').read();
 
 # Inject function name into lambdaWrapper
 lambda_wrapper_code = 'var __transCompiledCode = ' + fn_name + ';\n' + lambda_wrapper_code;
