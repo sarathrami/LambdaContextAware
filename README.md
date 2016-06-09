@@ -36,3 +36,6 @@ It uses the regenerator library(also used in ES6->ES5 transpiling) to turn a gen
 ## Contributors
 
 Sarath Rami
+
+## Reference
+https://github.com/facebook/regenerator
